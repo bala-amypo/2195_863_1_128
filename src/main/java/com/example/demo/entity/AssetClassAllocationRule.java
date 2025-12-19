@@ -24,7 +24,8 @@ public class AssetClassAllocationRule {
     public AssetClassAllocationRule(){
         this.active = true;
     }
-    public AssetClassAllocationRule(Long investorId,AssetClassType assetClass, Double targetPercentage){
+    
+    8\public AssetClassAllocationRule(Long investorId,AssetClassType assetClass, Double targetPercentage){
         setTargetPercentage(targetPercentage);
         this.investorId = investorId;
         this.assetClass = assetClass;
