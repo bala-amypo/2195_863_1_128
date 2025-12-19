@@ -22,7 +22,7 @@ public class AssetClassAllocationRule {
     private Boolean active = true;
 
     public AssetClassAllocationRule(){
-        this.active = true
+        this.active = true;
     }
     
     public AssetClassAllocationRule(Long investorId,AssetClassType assetClass, Double targetPercentage){
