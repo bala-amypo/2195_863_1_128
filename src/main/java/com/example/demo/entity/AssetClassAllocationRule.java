@@ -42,10 +42,10 @@ public class AssetClassAllocationRule {
     public Long getId(){return id;}
     public void setId(Long id){this.id = id;}
 
-    public long getInvestorId(){return investorId;}
+    public Long getInvestorId(){return investorId;}
     public void setInvestorId(Long investorId){this.investorId = investorId;}
 
-    public AssetClassType getAssetCllass(){return assetClass;}
+    public AssetClassType getAssetClass(){return assetClass;}
     public void setAssetClass(AssetClassType assetClass){this.assetClass = assetClass;}
 
     public Double getTargetPercentage(){return targetPercentage;}
