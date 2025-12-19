@@ -18,5 +18,14 @@ public class InventorProfile{
     private String email;
     @Column(nullable = false)
     private Boolean active = true;
-    @Column (nullable = false , updatable)
+    @Column (nullable = false , updatable = false)
+    private LocalDataTime createdAt;
+    public InvestorProfile(){
+        this.active = true;
+        this.createdAt = LocalDataTime.now();
+    }
+    public InvestorProfile(String investorId , String fullName ,String email)
+    {
+        
+    }
 }
