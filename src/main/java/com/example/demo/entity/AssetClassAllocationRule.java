@@ -39,5 +39,8 @@ public class AssetClassAllocationRule {
         this.targetPercentage = targetPercentage;
     }
 
-    
-    
+    public Long getId(){return id;}
+    public void setId(Long id){this.id = id;}
+
+    public long getInvestorId(){return investorId;}
+    public void 
