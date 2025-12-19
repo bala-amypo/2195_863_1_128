@@ -15,5 +15,13 @@ public class AssetClassAllocationRule {
     @Column(nullable = false)
     private AssetClassType assetClass;
 
-    @Column 
+    @Column(nullable = false)
+    private Double targetPercentage;
+
+    @Column(nullable = false)
+    private Boolean active = true;
+
+    public AssetClassAllocationRule(){
+        this
+    }
 }
