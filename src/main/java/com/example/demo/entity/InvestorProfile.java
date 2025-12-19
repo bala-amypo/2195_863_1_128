@@ -6,7 +6,7 @@ import java.time.LocalDataTime;
 @Entity
 @Table(name="investor_profiles" , uniqueConstraints = { @UniqueConstraint(columnNames ="investorId"), @UniqueConstraint(columnNames = "email")})
 
-public class InventorProfile{
+public class InvestorProfile{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
