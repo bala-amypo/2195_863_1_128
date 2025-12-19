@@ -44,5 +44,5 @@ public class InventorProfile{
     public String getInvestorId(){ return investorId; }
     public void setInvestorId(String investorId) { this.investorId = investorId; }
     public String getFullName() { return fullName; }
-    public void setFullName(String fullName)
+    public void setFullName(String fullName){this.fullName}
 }
