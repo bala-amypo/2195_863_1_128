@@ -48,4 +48,8 @@ public class AssetClassAllocationRule {
     public AssetClassType getAssetCllass(){return assetClass;}
     public void setAssetClass(AssetClassType assetClass){this.assetClass = assetClass;}
 
+    public Double getTargetPercentage(){return targetPercentage;}
     
+    public Boolean getActive(){return active;}
+
+    public void setActive(Boolean active){this.active = active;}
