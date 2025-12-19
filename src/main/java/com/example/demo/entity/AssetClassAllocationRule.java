@@ -32,7 +32,12 @@ public class AssetClassAllocationRule {
 
     }
     public void setTargetPercentage(Double targetPercentage){
-        if(targetPercentage == null || targetPercentage < 0 || targetPercentage > 100);
+        if(targetPercentage == null || targetPercentage < 0 || targetPercentage > 100){
+            throw new IllegalArgumentException("targetPercentage must be between 0 and 100");
+
+        }
+        this.targetPercentage = targetPercentage;
     }
-    this.targetP
-}
+
+    
+    
