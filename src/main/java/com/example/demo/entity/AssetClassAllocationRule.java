@@ -25,7 +25,14 @@ public class AssetClassAllocationRule {
         this.active = true;
     }
     public AssetClassAllocationRule(Long investorId,AssetClassType assetClass, Double targetPercentage){
-        setTargetPercentage(target)
+        setTargetPercentage(targetPercentage);
+        this.investorId = investorId;
+        this.assetClass = assetClass;
+        this.active = true;
 
     }
+    public void setTargetPercentage(Double targetPercentage){
+        if(targetPercentage == null || targetPercentage < 0 || targetPercentage > 100);
+    }
+    this.targetP
 }
