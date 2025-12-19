@@ -35,6 +35,12 @@ public class InventorProfile{
         if(createdAt == null){
             createdAt = LocalDateTime.now();
         }
-        if(active == null)
+        if(active == null){
+            active = true;
+        }
     }
+    public Long getId(){ return id; }
+    public void setId(Long id){this.id = id; }
+    public String getInvestorId(){ return investorId; }
+    public void setInvestor
 }
