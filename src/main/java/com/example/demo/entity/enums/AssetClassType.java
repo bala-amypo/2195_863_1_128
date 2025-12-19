@@ -1,4 +1,4 @@
-import com.example.demo.entity.enums;
+package com.example.demo.entity.enums;
 public enum AssetClassType { 
     STOCKS,
     BONDS,
