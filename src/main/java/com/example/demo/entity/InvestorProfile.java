@@ -4,4 +4,9 @@ import jakarta.presistence.*;
 import java.time.LocalDataTime;
 
 @Entity
-@Table(name="investor_profiles" , uniqueConstraint(columnNames ="investorId"), @UniqueConstraint(columnNames = "email"))
+@Table(name="investor_profiles" , uniqueConstraints = { @UniqueConstraint(columnNames ="investorId"), @UniqueConstraint(columnNames = "email")})
+
+public class InventorProfile{
+    @Id
+    @GeneratedValue(Strategy=)
+}
