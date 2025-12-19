@@ -43,4 +43,6 @@ public class AssetClassAllocationRule {
     public void setId(Long id){this.id = id;}
 
     public long getInvestorId(){return investorId;}
-    public void 
+    public void setInvestorId(Long investorId){this.investorId = investorId;}
+
+    public AssetClassType
