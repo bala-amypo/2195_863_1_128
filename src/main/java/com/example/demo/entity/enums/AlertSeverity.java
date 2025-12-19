@@ -1,5 +1,5 @@
 package com.example.demo.entity.enums;
-public enum RoleType {
+public enum AlertSeverity {
     LOW,
     MEDIUM,
     HIGH
