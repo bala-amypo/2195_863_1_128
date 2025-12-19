@@ -42,5 +42,7 @@ public class InventorProfile{
     public Long getId(){ return id; }
     public void setId(Long id){this.id = id; }
     public String getInvestorId(){ return investorId; }
-    public void setInvestor
+    public void setInvestorId(String investorId) { this.investorId = investorId; }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName)
 }
