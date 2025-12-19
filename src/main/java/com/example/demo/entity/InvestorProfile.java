@@ -19,10 +19,10 @@ public class InventorProfile{
     @Column(nullable = false)
     private Boolean active = true;
     @Column (nullable = false , updatable = false)
-    private LocalDataTime createdAt;
+    private LocalDateTime createdAt;
     public InvestorProfile(){
         this.active = true;
-        this.createdAt = LocalDataTime.now();
+        this.createdAt = LocalDateTime.now();
     }
     public InvestorProfile(String investorId , String fullName ,String email)
     {
@@ -48,6 +48,7 @@ public class InventorProfile{
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
     public Boolean getActive(){ return active; }
-    public void setActive(Boolean active){}
+    public void setActive(Boolean active){ this. active = active; }
+    public LocalDateTime getCreatedAt(){ return createdAt; }
 
 }
