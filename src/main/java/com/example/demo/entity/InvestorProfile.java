@@ -26,6 +26,15 @@ public class InventorProfile{
     }
     public InvestorProfile(String investorId , String fullName ,String email)
     {
-        
+        this();
+        this.investorId = investorId;
+        this.fullName = fullName;
+        this.email = email;
+    }
+    protected void onCreate(){
+        if(createdAt == null){
+            createdAt = LocalDateTime.now();
+        }
+        if(active == null)
     }
 }
