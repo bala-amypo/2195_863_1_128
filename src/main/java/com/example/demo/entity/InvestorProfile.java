@@ -8,5 +8,9 @@ import java.time.LocalDataTime;
 
 public class InventorProfile{
     @Id
-    @GeneratedValue(Strategy=)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable = false, unique = true)
+    private String investorId;
+    @Column(nullable)
 }
