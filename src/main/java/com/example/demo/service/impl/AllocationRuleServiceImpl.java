@@ -1,6 +1,6 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.AllocationRule;
+import com.example.demo.entity.AssetClassAllocationRule;
 import com.example.demo.service.AllocationRuleService;
 import org.springframework.stereotype.Service;
 
@@ -11,8 +11,17 @@ import java.util.List;
 public class AllocationRuleServiceImpl implements AllocationRuleService {
 
     @Override
-    public List<AllocationRule> getRulesByInvestor(Long investorId) {
-        // Minimal implementation to satisfy Spring & tests
+    public AssetClassAllocationRule createRule(AssetClassAllocationRule rule) {
+        return rule; // minimal implementation
+    }
+
+    @Override
+    public AssetClassAllocationRule updateRule(Long id, AssetClassAllocationRule rule) {
+        return rule; // minimal implementation
+    }
+
+    @Override
+    public List<AssetClassAllocationRule> getRulesByInvestor(Long investorId) {
         return Collections.emptyList();
     }
 }
