@@ -1,3 +1,4 @@
+
 package com.example.demo.security;
 
 import com.example.demo.entity.UserAccount;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collections;
 
 @Service
+@org.springframework.context.annotation.Primary
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserAccountRepository userAccountRepository;
