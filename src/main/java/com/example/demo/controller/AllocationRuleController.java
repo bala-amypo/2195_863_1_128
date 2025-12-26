@@ -8,10 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-@Tag(name = "Allocation Rules", description = "Asset allocation rule APIs")
-@SecurityRequirement(name = "bearerAuth")
-
-
 @RestController
 @RequestMapping("/api/rules")
 public class AllocationRuleController {
