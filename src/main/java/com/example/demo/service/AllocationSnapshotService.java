@@ -1,9 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.entity.AllocationSnapshot;
 import java.util.List;
 
 public interface AllocationSnapshotService {
 
-    List<AllocationSnapshot> getSnapshotsByInvestor(Long investorId);
+    Object computeSnapshot(Long investorId);
+
+    Object getSnapshotById(Long snapshotId);
+
+    List<Object> getAllSnapshots();
 }
