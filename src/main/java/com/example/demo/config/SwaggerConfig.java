@@ -1,10 +1,19 @@
 package com.example.demo.config;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-    // This is a placeholder for Swagger/OpenAPI configuration.
-    // In a real application, you would add @Bean definitions for OpenAPI here.
-    // For now, it exists to satisfy the file structure requirement.
+
+    @Bean
+    public OpenAPI apiInfo() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Demo API")
+                        .description("Demo Application API Documentation")
+                        .version("1.0.0"));
+    }
 }
