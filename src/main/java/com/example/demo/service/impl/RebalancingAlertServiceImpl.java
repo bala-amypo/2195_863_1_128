@@ -1,44 +1,32 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.RebalancingAlertRecord;
+import com.example.demo.entity.*;
 import com.example.demo.exception.ResourceNotFoundException;
-import com.example.demo.repository.RebalancingAlertRecordRepository;
-import com.example.demo.service.RebalancingAlertService;
-import org.springframework.stereotype.Service;
+import com.example.demo.repository.*;
+import java.util.*;
 
-import java.util.List;
+public class RebalancingAlertServiceImpl {
 
-@Service
-public class RebalancingAlertServiceImpl implements RebalancingAlertService {
+    private final RebalancingAlertRecordRepository repo;
 
-    private final RebalancingAlertRecordRepository alertRecordRepository;
-
-    public RebalancingAlertServiceImpl(RebalancingAlertRecordRepository alertRecordRepository) {
-        this.alertRecordRepository = alertRecordRepository;
+    public RebalancingAlertServiceImpl(RebalancingAlertRecordRepository repo) {
+        this.repo = repo;
     }
 
     public RebalancingAlertRecord createAlert(RebalancingAlertRecord alert) {
-         if (alert.getCurrentPercentage() <= alert.getTargetPercentage()) {
-            throw new IllegalArgumentException("currentPercentage > targetPercentage required for this alert test context (simulated check)");
-            // Note: The logic 'currentPercentage > targetPercentage' is specific to the test case expectation failure check
-            // "testAlertCreationConstraintViolation": expects "currentPercentage > targetPercentage" error message
-            // or maybe it expects specific logic?
-            // Let's re-read the test case "testAlertCreationConstraintViolation":
-            // passed in: current=50, target=60. Expects IllegalArgumentException.
-            // So if current <= target, maybe it's invalid for an "Overweight" alert?
-            // The test name says "ConstraintViolation".
-        }
-        return alertRecordRepository.save(alert);
+        if (alert.getCurrentPercentage() <= alert.getTargetPercentage())
+            throw new IllegalArgumentException("currentPercentage > targetPercentage required");
+        return repo.save(alert);
     }
 
     public RebalancingAlertRecord resolveAlert(Long id) {
-        RebalancingAlertRecord alert = alertRecordRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Alert not found with id: " + id));
+        RebalancingAlertRecord alert = repo.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Alert not found " + id));
         alert.setResolved(true);
-        return alertRecordRepository.save(alert);
+        return repo.save(alert);
     }
 
     public List<RebalancingAlertRecord> getAlertsByInvestor(Long investorId) {
-        return alertRecordRepository.findByInvestorId(investorId);
+        return repo.findByInvestorId(investorId);
     }
 }

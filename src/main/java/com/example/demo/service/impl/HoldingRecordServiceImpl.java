@@ -1,34 +1,28 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.entity.HoldingRecord;
-import com.example.demo.repository.HoldingRecordRepository;
-import com.example.demo.service.HoldingRecordService;
-import org.springframework.stereotype.Service;
+import com.example.demo.entity.*;
+import com.example.demo.repository.*;
+import java.util.*;
 
-import java.util.List;
-import java.util.Optional;
+public class HoldingRecordServiceImpl {
 
-@Service
-public class HoldingRecordServiceImpl implements HoldingRecordService {
+    private final HoldingRecordRepository repo;
 
-    private final HoldingRecordRepository holdingRecordRepository;
-
-    public HoldingRecordServiceImpl(HoldingRecordRepository holdingRecordRepository) {
-        this.holdingRecordRepository = holdingRecordRepository;
+    public HoldingRecordServiceImpl(HoldingRecordRepository repo) {
+        this.repo = repo;
     }
 
-    public HoldingRecord recordHolding(HoldingRecord holding) {
-        if (holding.getCurrentValue() <= 0) {
-            throw new IllegalArgumentException("Holding value must be > 0");
-        }
-        return holdingRecordRepository.save(holding);
+    public HoldingRecord recordHolding(HoldingRecord record) {
+        if (record.getCurrentValue() <= 0)
+            throw new IllegalArgumentException("Value must be > 0");
+        return repo.save(record);
     }
 
     public List<HoldingRecord> getHoldingsByInvestor(Long investorId) {
-        return holdingRecordRepository.findByInvestorId(investorId);
+        return repo.findByInvestorId(investorId);
     }
 
     public Optional<HoldingRecord> getHoldingById(Long id) {
-        return holdingRecordRepository.findById(id);
+        return repo.findById(id);
     }
 }
