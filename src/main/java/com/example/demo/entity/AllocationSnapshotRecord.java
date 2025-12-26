@@ -2,12 +2,10 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class AllocationSnapshotRecord {
@@ -29,6 +27,46 @@ public class AllocationSnapshotRecord {
         this.investorId = investorId;
         this.snapshotDate = snapshotDate;
         this.totalPortfolioValue = totalPortfolioValue;
+        this.allocationDetailsJson = allocationDetailsJson;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getInvestorId() {
+        return investorId;
+    }
+
+    public void setInvestorId(Long investorId) {
+        this.investorId = investorId;
+    }
+
+    public LocalDateTime getSnapshotDate() {
+        return snapshotDate;
+    }
+
+    public void setSnapshotDate(LocalDateTime snapshotDate) {
+        this.snapshotDate = snapshotDate;
+    }
+
+    public Double getTotalPortfolioValue() {
+        return totalPortfolioValue;
+    }
+
+    public void setTotalPortfolioValue(Double totalPortfolioValue) {
+        this.totalPortfolioValue = totalPortfolioValue;
+    }
+
+    public String getAllocationDetailsJson() {
+        return allocationDetailsJson;
+    }
+
+    public void setAllocationDetailsJson(String allocationDetailsJson) {
         this.allocationDetailsJson = allocationDetailsJson;
     }
 }
