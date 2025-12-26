@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import com.example.demo.entity.enums.AlertSeverity;
 import com.example.demo.entity.enums.AssetClassType;
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
 
 @Entity
