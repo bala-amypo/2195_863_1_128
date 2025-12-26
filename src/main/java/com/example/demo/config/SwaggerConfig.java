@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class SwaggerConfig {
 
     @Bean
+    @org.springframework.context.annotation.Primary
     public OpenAPI investmentSystemOpenAPI() {
         return new OpenAPI()
                 .info(new Info().title("Investment System API")
