@@ -11,29 +11,29 @@ import java.util.List;
 @RequestMapping("/api/investors")
 public class InvestorProfileController {
 
-    private final InvestorProfileService service;
+    private final InvestorProfileService investorProfileService;
 
-    public InvestorProfileController(InvestorProfileService service) {
-        this.service = service;
+    public InvestorProfileController(InvestorProfileService investorProfileService) {
+        this.investorProfileService = investorProfileService;
     }
 
     @PostMapping
     public ResponseEntity<InvestorProfile> createInvestor(@RequestBody InvestorProfile investor) {
-        return ResponseEntity.ok(service.createInvestor(investor));
+        return ResponseEntity.ok(investorProfileService.createInvestor(investor));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<InvestorProfile> getInvestorById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getInvestorById(id));
+        return ResponseEntity.ok(investorProfileService.getInvestorById(id));
     }
 
     @GetMapping
     public ResponseEntity<List<InvestorProfile>> getAllInvestors() {
-        return ResponseEntity.ok(service.getAllInvestors());
+        return ResponseEntity.ok(investorProfileService.getAllInvestors());
     }
 
-    @PatchMapping("/{id}/status")
+    @PutMapping("/{id}/status")
     public ResponseEntity<InvestorProfile> updateInvestorStatus(@PathVariable Long id, @RequestParam Boolean active) {
-        return ResponseEntity.ok(service.updateInvestorStatus(id, active));
+        return ResponseEntity.ok(investorProfileService.updateInvestorStatus(id, active));
     }
 }

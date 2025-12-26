@@ -11,34 +11,24 @@ import java.util.List;
 @RequestMapping("/api/alerts")
 public class RebalancingAlertController {
 
-    private final RebalancingAlertService service;
+    private final RebalancingAlertService rebalancingAlertService;
 
-    public RebalancingAlertController(RebalancingAlertService service) {
-        this.service = service;
+    public RebalancingAlertController(RebalancingAlertService rebalancingAlertService) {
+        this.rebalancingAlertService = rebalancingAlertService;
     }
 
     @PostMapping
     public ResponseEntity<RebalancingAlertRecord> createAlert(@RequestBody RebalancingAlertRecord alert) {
-        return ResponseEntity.ok(service.createAlert(alert));
+        return ResponseEntity.ok(rebalancingAlertService.createAlert(alert));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<RebalancingAlertRecord> getAlertById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getAlertById(id));
+    @PutMapping("/{id}/resolve")
+    public ResponseEntity<RebalancingAlertRecord> resolveAlert(@PathVariable Long id) {
+        return ResponseEntity.ok(rebalancingAlertService.resolveAlert(id));
     }
 
     @GetMapping("/investor/{investorId}")
     public ResponseEntity<List<RebalancingAlertRecord>> getAlertsByInvestor(@PathVariable Long investorId) {
-        return ResponseEntity.ok(service.getAlertsByInvestor(investorId));
-    }
-
-    @PatchMapping("/{id}/resolve")
-    public ResponseEntity<RebalancingAlertRecord> resolveAlert(@PathVariable Long id) {
-        return ResponseEntity.ok(service.resolveAlert(id));
-    }
-
-    @GetMapping
-    public ResponseEntity<List<RebalancingAlertRecord>> getAllAlerts() {
-        return ResponseEntity.ok(service.getAllAlerts());
+        return ResponseEntity.ok(rebalancingAlertService.getAlertsByInvestor(investorId));
     }
 }
