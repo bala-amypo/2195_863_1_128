@@ -3,68 +3,33 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
-
 @Entity
-
 public class AllocationSnapshotRecord {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long investorId; // 3NF normalization
-
+    private Long investorId;
     private LocalDateTime snapshotDate;
-
     private Double totalPortfolioValue;
 
-    @Lob
-    private String allocationDetailsJson;
+    @Column(columnDefinition = "TEXT")
+    private String allocationJson;
 
-    public AllocationSnapshotRecord(Long investorId, LocalDateTime snapshotDate, Double totalPortfolioValue, String allocationDetailsJson) {
+    public AllocationSnapshotRecord() {}
+
+    public AllocationSnapshotRecord(Long investorId, LocalDateTime snapshotDate,
+                                    Double totalPortfolioValue, String allocationJson) {
         this.investorId = investorId;
         this.snapshotDate = snapshotDate;
         this.totalPortfolioValue = totalPortfolioValue;
-        this.allocationDetailsJson = allocationDetailsJson;
+        this.allocationJson = allocationJson;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getInvestorId() {
-        return investorId;
-    }
-
-    public void setInvestorId(Long investorId) {
-        this.investorId = investorId;
-    }
-
-    public LocalDateTime getSnapshotDate() {
-        return snapshotDate;
-    }
-
-    public void setSnapshotDate(LocalDateTime snapshotDate) {
-        this.snapshotDate = snapshotDate;
-    }
-
-    public Double getTotalPortfolioValue() {
-        return totalPortfolioValue;
-    }
-
-    public void setTotalPortfolioValue(Double totalPortfolioValue) {
-        this.totalPortfolioValue = totalPortfolioValue;
-    }
-
-    public String getAllocationDetailsJson() {
-        return allocationDetailsJson;
-    }
-
-    public void setAllocationDetailsJson(String allocationDetailsJson) {
-        this.allocationDetailsJson = allocationDetailsJson;
-    }
+    // getters
+    public Long getId() { return id; }
+    public Long getInvestorId() { return investorId; }
+    public LocalDateTime getSnapshotDate() { return snapshotDate; }
+    public Double getTotalPortfolioValue() { return totalPortfolioValue; }
 }
