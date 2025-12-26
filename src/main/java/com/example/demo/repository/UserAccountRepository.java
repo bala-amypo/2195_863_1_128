@@ -1,7 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.*;
-import com.example.demo.entity.enums.AssetClassType;
+import com.example.demo.entity.UserAccount;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
-public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {}
+
+import java.util.Optional;
+
+public interface UserAccountRepository extends JpaRepository<UserAccount, Long> {
+
+    Optional<UserAccount> findByUsername(String username);
+}
