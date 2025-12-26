@@ -4,10 +4,7 @@ import com.example.demo.entity.AllocationSnapshotRecord;
 import java.util.List;
 
 public interface AllocationSnapshotService {
-
     AllocationSnapshotRecord computeSnapshot(Long investorId);
-
-    AllocationSnapshotRecord getSnapshotById(Long snapshotId);
-
+    AllocationSnapshotRecord getSnapshotById(Long id);
     List<AllocationSnapshotRecord> getAllSnapshots();
 }
