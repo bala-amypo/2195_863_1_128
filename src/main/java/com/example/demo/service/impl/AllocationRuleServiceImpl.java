@@ -11,37 +11,35 @@ import java.util.List;
 @Service
 public class AllocationRuleServiceImpl implements AllocationRuleService {
 
-    private final AssetClassAllocationRuleRepository repository;
+    private final AssetClassAllocationRuleRepository allocationRuleRepository;
 
-    public AllocationRuleServiceImpl(AssetClassAllocationRuleRepository repository) {
-        this.repository = repository;
+    public AllocationRuleServiceImpl(AssetClassAllocationRuleRepository allocationRuleRepository) {
+        this.allocationRuleRepository = allocationRuleRepository;
     }
 
-    @Override
     public AssetClassAllocationRule createRule(AssetClassAllocationRule rule) {
-        return repository.save(rule);
+        if (rule.getTargetPercentage() < 0 || rule.getTargetPercentage() > 100) {
+            throw new IllegalArgumentException("Target percentage must be between 0 and 100");
+        }
+        return allocationRuleRepository.save(rule);
     }
 
-    @Override
-    public AssetClassAllocationRule updateRule(Long id, Double targetPercentage) {
-        AssetClassAllocationRule rule = getRuleById(id);
-        rule.setTargetPercentage(targetPercentage); 
-        return repository.save(rule);
+    public AssetClassAllocationRule updateRule(Long id, AssetClassAllocationRule updatedRule) {
+        AssetClassAllocationRule existingRule = allocationRuleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Rule not found with id: " + id));
+        
+        if (updatedRule.getTargetPercentage() < 0 || updatedRule.getTargetPercentage() > 100) {
+           throw new IllegalArgumentException("Target percentage must be between 0 and 100");
+        }
+
+        existingRule.setTargetPercentage(updatedRule.getTargetPercentage());
+        existingRule.setAssetClass(updatedRule.getAssetClass());
+        existingRule.setActive(updatedRule.getActive());
+        
+        return allocationRuleRepository.save(existingRule);
     }
 
-    @Override
     public List<AssetClassAllocationRule> getRulesByInvestor(Long investorId) {
-        return repository.findByInvestorId(investorId);
-    }
-
-    @Override
-    public List<AssetClassAllocationRule> getActiveRules(Long investorId) {
-        return repository.findActiveRulesHql(investorId);
-    }
-
-    @Override
-    public AssetClassAllocationRule getRuleById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Rule not found: " + id));
+        return allocationRuleRepository.findByInvestorId(investorId);
     }
 }
