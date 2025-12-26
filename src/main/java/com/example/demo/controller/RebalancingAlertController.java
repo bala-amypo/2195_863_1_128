@@ -17,12 +17,7 @@ public class RebalancingAlertController {
         this.rebalancingAlertService = rebalancingAlertService;
     }
 
-    @PostMapping
-    public ResponseEntity<RebalancingAlertRecord> createAlert(@RequestBody RebalancingAlertRecord alert) {
-        return ResponseEntity.ok(rebalancingAlertService.createAlert(alert));
-    }
-
-    @PutMapping("/{id}/resolve")
+    @PostMapping("/{id}/resolve")
     public ResponseEntity<RebalancingAlertRecord> resolveAlert(@PathVariable Long id) {
         return ResponseEntity.ok(rebalancingAlertService.resolveAlert(id));
     }

@@ -22,18 +22,25 @@ public class InvestorProfileController {
         return ResponseEntity.ok(investorProfileService.createInvestor(investor));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<InvestorProfile> getInvestorById(@PathVariable Long id) {
-        return ResponseEntity.ok(investorProfileService.getInvestorById(id));
-    }
-
     @GetMapping
     public ResponseEntity<List<InvestorProfile>> getAllInvestors() {
         return ResponseEntity.ok(investorProfileService.getAllInvestors());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<InvestorProfile> getInvestorById(@PathVariable Long id) {
+        return ResponseEntity.ok(investorProfileService.getInvestorById(id));
+    }
+
+    @GetMapping("/by-investor-id/{investorId}")
+    public ResponseEntity<InvestorProfile> getByInvestorId(@PathVariable String investorId) {
+        return investorProfileService.findByInvestorId(investorId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @PutMapping("/{id}/status")
-    public ResponseEntity<InvestorProfile> updateInvestorStatus(@PathVariable Long id, @RequestParam Boolean active) {
-        return ResponseEntity.ok(investorProfileService.updateInvestorStatus(id, active));
+    public ResponseEntity<InvestorProfile> updateStatus(@PathVariable Long id, @RequestParam Boolean status) {
+        return ResponseEntity.ok(investorProfileService.updateInvestorStatus(id, status));
     }
 }
