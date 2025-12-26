@@ -1,57 +1,66 @@
 package com.example.demo.config;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.example.demo.entity.UserAccount;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
 
-import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
 
+@Component
 public class JwtTokenProvider {
 
-    private final Key secretKey;
-    private final long validityInMilliseconds;
+    private final String jwtSecret;
+    private final long jwtExpirationInMs;
 
-    public JwtTokenProvider(String secret, long validityInMilliseconds) {
-        this.secretKey = new SecretKeySpec(
-                secret.getBytes(),
-                SignatureAlgorithm.HS256.getJcaName()
-        );
-        this.validityInMilliseconds = validityInMilliseconds;
+    public JwtTokenProvider(@Value("${app.jwtSecret:thisIsA32ByteMinimumSecureJwtTestKey!}") String jwtSecret,
+                            @Value("${app.jwtExpirationInMs:3600000}") long jwtExpirationInMs) {
+        this.jwtSecret = jwtSecret;
+        this.jwtExpirationInMs = jwtExpirationInMs;
     }
 
-    public String createToken(String username) {
+    public String generateToken(Authentication authentication, UserAccount user) {
         Date now = new Date();
-        Date expiry = new Date(now.getTime() + validityInMilliseconds);
+        Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);
 
+        // In a real app we might use authentication.getName() or user.getUsername()
+        // The test passes both.
+        
         return Jwts.builder()
-                .setSubject(username)
-                .setIssuedAt(now)
-                .setExpiration(expiry)
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .setSubject(user.getUsername())
+                .claim("id", user.getId())
+                .claim("role", user.getRole().name())
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
-    public boolean validateToken(String token) {
-        try {
-            Jwts.parserBuilder()
-                    .setSigningKey(secretKey)
-                    .build()
-                    .parseClaimsJws(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+    private Key getSigningKey() {
+        byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyBytes);
     }
 
-    public String getUsername(String token) {
+    public String getUsernameFromToken(String token) {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(secretKey)
+                .setSigningKey(getSigningKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
 
         return claims.getSubject();
+    }
+
+    public boolean validateToken(String authToken) {
+        try {
+            Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(authToken);
+            return true;
+        } catch (JwtException | IllegalArgumentException ex) {
+            return false;
+        }
     }
 }

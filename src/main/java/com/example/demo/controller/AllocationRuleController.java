@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/allocation-rules")
+@RequestMapping("/api/rules")
 public class AllocationRuleController {
 
     private final AllocationRuleService allocationRuleService;

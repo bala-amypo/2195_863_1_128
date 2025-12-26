@@ -26,7 +26,7 @@ public class AllocationSnapshotController {
     public ResponseEntity<AllocationSnapshotRecord> getSnapshotById(@PathVariable Long id) {
         return ResponseEntity.ok(allocationSnapshotService.getSnapshotById(id));
     }
-    
+
     @GetMapping
     public ResponseEntity<List<AllocationSnapshotRecord>> getAllSnapshots() {
         return ResponseEntity.ok(allocationSnapshotService.getAllSnapshots());
