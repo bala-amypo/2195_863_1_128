@@ -2,13 +2,11 @@ package com.example.demo.entity;
 
 import com.example.demo.entity.enums.AssetClassType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class HoldingRecord {
 
     @Id

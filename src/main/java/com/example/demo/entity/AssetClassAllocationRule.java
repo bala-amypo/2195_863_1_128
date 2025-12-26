@@ -2,12 +2,10 @@ package com.example.demo.entity;
 
 import com.example.demo.entity.enums.AssetClassType;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+
 
 @Entity
-@NoArgsConstructor
-@AllArgsConstructor
+
 public class AssetClassAllocationRule {
 
     @Id
