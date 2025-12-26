@@ -4,22 +4,24 @@ import jakarta.persistence.*;
 
 @Entity
 public class InvestorProfile {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
     private String investorId;
-
     private String fullName;
-
-    @Column(unique = true)
     private String email;
-
     private Boolean active;
 
     public InvestorProfile() {}
+    
+    public InvestorProfile(Long id, String investorId, String fullName, String email, Boolean active) {
+        this.id = id;
+        this.investorId = investorId;
+        this.fullName = fullName;
+        this.email = email;
+        this.active = active;
+    }
 
     public InvestorProfile(String investorId, String fullName, String email, Boolean active) {
         this.investorId = investorId;
@@ -28,7 +30,6 @@ public class InvestorProfile {
         this.active = active;
     }
 
-    // getters & setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
