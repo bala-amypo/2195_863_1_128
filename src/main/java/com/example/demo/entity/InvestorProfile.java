@@ -2,9 +2,7 @@ package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
-
 @Entity
-
 public class InvestorProfile {
 
     @Id
@@ -16,10 +14,12 @@ public class InvestorProfile {
 
     private String fullName;
 
-    @Column(unique = true) // 1NF Normalization test
+    @Column(unique = true)
     private String email;
 
     private Boolean active;
+
+    public InvestorProfile() {}
 
     public InvestorProfile(String investorId, String fullName, String email, Boolean active) {
         this.investorId = investorId;
@@ -28,43 +28,19 @@ public class InvestorProfile {
         this.active = active;
     }
 
-    public Long getId() {
-        return id;
-    }
+    // getters & setters
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    public String getInvestorId() { return investorId; }
+    public void setInvestorId(String investorId) { this.investorId = investorId; }
 
-    public String getInvestorId() {
-        return investorId;
-    }
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
 
-    public void setInvestorId(String investorId) {
-        this.investorId = investorId;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
+    public Boolean getActive() { return active; }
+    public void setActive(Boolean active) { this.active = active; }
 }
