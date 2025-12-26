@@ -11,29 +11,24 @@ import java.util.List;
 @RequestMapping("/api/snapshots")
 public class AllocationSnapshotController {
 
-    private final AllocationSnapshotService service;
+    private final AllocationSnapshotService allocationSnapshotService;
 
-    public AllocationSnapshotController(AllocationSnapshotService service) {
-        this.service = service;
+    public AllocationSnapshotController(AllocationSnapshotService allocationSnapshotService) {
+        this.allocationSnapshotService = allocationSnapshotService;
     }
 
-    @PostMapping("/compute")
-    public ResponseEntity<AllocationSnapshotRecord> computeSnapshot(@RequestParam Long investorId) {
-        return ResponseEntity.ok(service.computeSnapshot(investorId));
+    @PostMapping("/compute/{investorId}")
+    public ResponseEntity<AllocationSnapshotRecord> computeSnapshot(@PathVariable Long investorId) {
+        return ResponseEntity.ok(allocationSnapshotService.computeSnapshot(investorId));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AllocationSnapshotRecord> getSnapshotById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getSnapshotById(id));
+        return ResponseEntity.ok(allocationSnapshotService.getSnapshotById(id));
     }
-
-    @GetMapping("/investor/{investorId}")
-    public ResponseEntity<List<AllocationSnapshotRecord>> getSnapshotsByInvestor(@PathVariable Long investorId) {
-        return ResponseEntity.ok(service.getSnapshotsByInvestor(investorId));
-    }
-
+    
     @GetMapping
     public ResponseEntity<List<AllocationSnapshotRecord>> getAllSnapshots() {
-        return ResponseEntity.ok(service.getAllSnapshots());
+        return ResponseEntity.ok(allocationSnapshotService.getAllSnapshots());
     }
 }

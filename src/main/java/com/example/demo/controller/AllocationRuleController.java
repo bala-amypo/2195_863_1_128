@@ -11,29 +11,24 @@ import java.util.List;
 @RequestMapping("/api/allocation-rules")
 public class AllocationRuleController {
 
-    private final AllocationRuleService service;
+    private final AllocationRuleService allocationRuleService;
 
-    public AllocationRuleController(AllocationRuleService service) {
-        this.service = service;
+    public AllocationRuleController(AllocationRuleService allocationRuleService) {
+        this.allocationRuleService = allocationRuleService;
     }
 
     @PostMapping
     public ResponseEntity<AssetClassAllocationRule> createRule(@RequestBody AssetClassAllocationRule rule) {
-        return ResponseEntity.ok(service.createRule(rule));
+        return ResponseEntity.ok(allocationRuleService.createRule(rule));
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<AssetClassAllocationRule> getRuleById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getRuleById(id));
+    @PutMapping("/{id}")
+    public ResponseEntity<AssetClassAllocationRule> updateRule(@PathVariable Long id, @RequestBody AssetClassAllocationRule rule) {
+        return ResponseEntity.ok(allocationRuleService.updateRule(id, rule));
     }
 
     @GetMapping("/investor/{investorId}")
     public ResponseEntity<List<AssetClassAllocationRule>> getRulesByInvestor(@PathVariable Long investorId) {
-        return ResponseEntity.ok(service.getRulesByInvestor(investorId));
-    }
-
-    @PatchMapping("/{id}")
-    public ResponseEntity<AssetClassAllocationRule> updateRule(@PathVariable Long id, @RequestParam Double targetPercentage) {
-        return ResponseEntity.ok(service.updateRule(id, targetPercentage));
+        return ResponseEntity.ok(allocationRuleService.getRulesByInvestor(investorId));
     }
 }

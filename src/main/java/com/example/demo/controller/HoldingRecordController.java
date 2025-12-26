@@ -11,29 +11,26 @@ import java.util.List;
 @RequestMapping("/api/holdings")
 public class HoldingRecordController {
 
-    private final HoldingRecordService service;
+    private final HoldingRecordService holdingRecordService;
 
-    public HoldingRecordController(HoldingRecordService service) {
-        this.service = service;
+    public HoldingRecordController(HoldingRecordService holdingRecordService) {
+        this.holdingRecordService = holdingRecordService;
     }
 
     @PostMapping
     public ResponseEntity<HoldingRecord> recordHolding(@RequestBody HoldingRecord holding) {
-        return ResponseEntity.ok(service.recordHolding(holding));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<HoldingRecord> getHoldingById(@PathVariable Long id) {
-        return ResponseEntity.ok(service.getHoldingById(id));
+        return ResponseEntity.ok(holdingRecordService.recordHolding(holding));
     }
 
     @GetMapping("/investor/{investorId}")
     public ResponseEntity<List<HoldingRecord>> getHoldingsByInvestor(@PathVariable Long investorId) {
-        return ResponseEntity.ok(service.getHoldingsByInvestor(investorId));
+        return ResponseEntity.ok(holdingRecordService.getHoldingsByInvestor(investorId));
     }
 
-    @GetMapping
-    public ResponseEntity<List<HoldingRecord>> getAllHoldings() {
-        return ResponseEntity.ok(service.getAllHoldings());
+    @GetMapping("/{id}")
+    public ResponseEntity<HoldingRecord> getHoldingById(@PathVariable Long id) {
+        return holdingRecordService.getHoldingById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
