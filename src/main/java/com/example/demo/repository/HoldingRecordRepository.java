@@ -13,11 +13,5 @@ import java.util.List;
 public interface HoldingRecordRepository extends JpaRepository<HoldingRecord, Long> {
     List<HoldingRecord> findByInvestorId(Long investorId);
 
-    // HQL for "value greater than" test
-    @Query("SELECT h FROM HoldingRecord h WHERE h.currentValue > :val")
-    List<HoldingRecord> findByValueGreaterThan(@Param("val") Double value);
 
-    // HQL for "investor and asset class" test
-    @Query("SELECT h FROM HoldingRecord h WHERE h.investorId = :invId AND h.assetClass = :ac")
-    List<HoldingRecord> findByInvestorAndAssetClass(@Param("invId") Long investorId, @Param("ac") AssetClassType assetClass);
 }
