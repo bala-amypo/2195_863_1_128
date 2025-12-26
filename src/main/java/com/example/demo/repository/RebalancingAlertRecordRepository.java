@@ -1,9 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.*;
-import com.example.demo.entity.enums.AssetClassType;
+import com.example.demo.entity.RebalancingAlertRecord;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
 public interface RebalancingAlertRecordRepository extends JpaRepository<RebalancingAlertRecord, Long> {
     List<RebalancingAlertRecord> findByInvestorId(Long investorId);
 }

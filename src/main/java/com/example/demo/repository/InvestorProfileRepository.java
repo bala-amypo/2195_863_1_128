@@ -1,10 +1,12 @@
 package com.example.demo.repository;
 
-import com.example.demo.entity.*;
-import com.example.demo.entity.enums.AssetClassType;
+import com.example.demo.entity.InvestorProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.*;
+import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
+@Repository
 public interface InvestorProfileRepository extends JpaRepository<InvestorProfile, Long> {
     Optional<InvestorProfile> findByInvestorId(String investorId);
 }
