@@ -1,7 +1,10 @@
-package com.example.demo.dto;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class AuthRequest {
-    private String username;
+
+    @JsonProperty("email")
+    private String username;   // maps email → username
+
     private String password;
 
     public AuthRequest() {}
