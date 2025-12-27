@@ -17,17 +17,20 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
 
         SecurityScheme bearerAuth = new SecurityScheme()
+                .name("Authorization")          // ✅ IMPORTANT
                 .type(SecurityScheme.Type.HTTP)
                 .scheme("bearer")
                 .bearerFormat("JWT");
 
         return new OpenAPI()
                 .servers(List.of(
-                        new Server().url("https://9065.32procr.amypo.ai/")
+                        new Server().url("https://9065.32procr.amypo.ai")
                 ))
                 .components(new Components()
                         .addSecuritySchemes("bearerAuth", bearerAuth)
                 )
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"));
+                .addSecurityItem(
+                        new SecurityRequirement().addList("bearerAuth")
+                );
     }
 }
